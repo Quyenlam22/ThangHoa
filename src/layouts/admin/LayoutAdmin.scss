@@ -8,10 +8,7 @@
     height: 64px;
     line-height: 64px;
 
-    /* Đổi viền cố định sang dạng trong suốt mờ để tự thích ứng sáng/tối */
     border-bottom: 1px solid rgba(0, 0, 0, 0.06); 
-
-    /* TUYỆT ĐỐI KHÔNG ĐỂ background: #fff ở đây nữa để Ant Design tự lo */
 
     h4 {
         margin: 0;
@@ -67,7 +64,7 @@
 
 .content-admin {
     padding: 20px;
-    min-height: calc(100vh - 64px); /* Tự động co giãn chiều cao khít màn hình */
+    // min-height: calc(100vh - 64px); 
 }
 
 .ant-form-item-row {
@@ -83,4 +80,83 @@
             border-right: 1px solid rgba(255, 255, 255, 0.12);
         }
     }
+}
+
+/* Cấu hình mặc định cho màn hình máy tính (PC) lớn */
+.admin-navigation-wrapper {
+  position: absolute;
+  top: 64px;
+  left: 0;
+  bottom: 0;
+  width: 200px; // Khớp với chiều rộng thanh Sider cố định
+  z-index: 50;
+  transition: width 0.2s ease;
+}
+
+// Nếu sider thu nhỏ (nếu bạn có class tương ứng, không thì để mặc định)
+.ant-layout-sider-collapsed + .admin-navigation-wrapper {
+  width: 80px;
+}
+
+/* KHOẢNG RESPONSIVE CHO MOBILE */
+@media (max-width: 480px) {
+  .sider {
+    display: none !important;
+  }
+
+  .header-admin__collapse, .header-admin__logo {
+    display: none !important;
+  }
+
+  .header-admin__nav {
+    justify-content: flex-end !important;
+  }
+
+  // Biến đổi giỏ chứa menu thành thanh điều hướng dưới đáy
+  .admin-navigation-wrapper {
+    position: fixed !important;
+    top: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 56px !important;
+    z-index: 999 !important;
+  }
+
+  .dynamic-admin-menu {
+    display: flex !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+    height: 56px !important;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+
+    .ant-menu-title-content {
+      display: none !important; /* Ẩn chữ trên mobile */
+    }
+
+    .ant-menu-item {
+      flex: 1 !important;
+      text-align: center !important;
+      height: 100% !important;
+      line-height: 56px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+
+      .anticon {
+        font-size: 22px !important;
+        margin: 0 !important;
+      }
+    }
+  }
+
+  .content-admin {
+    padding: 15px !important;
+    margin-left: 0 !important;
+    margin-bottom: 56px !important; 
+  }
 }

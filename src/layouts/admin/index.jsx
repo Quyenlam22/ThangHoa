@@ -1,23 +1,22 @@
-import { Layout, ConfigProvider, theme as antdTheme } from "antd";
+import { Layout, ConfigProvider, theme as antdTheme } from "antd"; 
 import './LayoutAdmin.scss';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import { useState, useContext } from "react";
-import { ThemeContext } from "../../Context/ThemeContext";
+import { useState, useContext } from "react"; 
+import { ThemeContext } from "../../Context/ThemeContext"; 
 import MenuSider from "../../components/MenuSider";
 import { Outlet } from "react-router-dom";
 import ThemeToggle from "../../components/ThemeToggle";
 
-// Tách các component con từ Layout của Ant Design
 const { Header, Sider, Content } = Layout;
 
 function LayoutAdmin() {
     const [collapse, setCollapse] = useState(false);
-    const { theme } = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext); 
 
     return (
-        <ConfigProvider
-            theme={{
-                algorithm: theme === 'dark' ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm
+        <ConfigProvider 
+            theme={{ 
+                algorithm: theme === 'dark' ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm 
             }}
         >
             <Layout className="layout-default" style={{ minHeight: '100vh' }}>
@@ -31,16 +30,23 @@ function LayoutAdmin() {
                         <div className="header-admin__collapse" onClick={() => setCollapse(!collapse)}>
                             {collapse ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                         </div>
-                        <div>
+                        <div className="header-admin__theme">
                             <ThemeToggle />
                         </div>
                     </div>
                 </Header>
-
+                
                 <Layout>
+                    {/* Thanh Sider tĩnh bên trái cho PC */}
                     <Sider theme={theme} className="sider" collapsed={collapse}>
-                        <MenuSider />
+                        {/* Không bỏ MenuSider vào đây nữa */}
                     </Sider>
+
+                    {/* Chỉ duy nhất MỘT giỏ chứa Menu điều hướng cho cả 2 thiết bị */}
+                    <div className="admin-navigation-wrapper">
+                        <MenuSider />
+                    </div>
+
                     <Content className="content-admin">
                         <Outlet />
                     </Content>
