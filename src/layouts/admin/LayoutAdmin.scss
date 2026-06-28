@@ -1,0 +1,86 @@
+.header-admin {
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 0!important; /* Reset padding mặc định của Antd Header */
+    height: 64px;
+    line-height: 64px;
+
+    /* Đổi viền cố định sang dạng trong suốt mờ để tự thích ứng sáng/tối */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06); 
+
+    /* TUYỆT ĐỐI KHÔNG ĐỂ background: #fff ở đây nữa để Ant Design tự lo */
+
+    h4 {
+        margin: 0;
+        color: inherit; /* Chữ tự động chuyển trắng/đen theo theme */
+    }
+
+    &__logo {
+        width: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-right: 1px solid rgba(0, 0, 0, 0.06);
+        transition: all 0.2s ease; /* Khớp với tốc độ đóng mở Sider của Antd */
+        height: 100%;
+
+        &__image {
+            aspect-ratio: 1/1;
+            
+            img {
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    /* Khi thu gọn menu bên trái */
+    &__logo--collapse {
+        width: 80px !important;
+        transition: all 0.2s ease;
+    }
+
+    &__nav {
+        flex: 1;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 20px;
+        height: 100%;
+    }
+
+    &__collapse {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: color 0.3s;
+        
+        &:hover {
+            color: #1677ff; /* Tạo hiệu ứng đổi màu xanh nhẹ khi hover vào nút thu gọn */
+        }
+    }
+}
+
+.content-admin {
+    padding: 20px;
+    min-height: calc(100vh - 64px); /* Tự động co giãn chiều cao khít màn hình */
+}
+
+.ant-form-item-row {
+    flex-direction: row !important;
+}
+
+/* Thêm một chút tinh chỉnh cho Dark Mode để đường viền chuyển sang màu sáng mờ */
+[data-theme='dark'] {
+    .header-admin {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        
+        &__logo {
+            border-right: 1px solid rgba(255, 255, 255, 0.12);
+        }
+    }
+}
